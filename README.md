@@ -1,5 +1,5 @@
 CardioAgent
-Proyecto de Ingeniería de Sistemas de Información - USIL (Séptimo Ciclo)
+Proyecto de Ingeniería de Sistemas de Información 
 
 Integrantes:
 Huanuco Flores, Luis Angel
