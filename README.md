@@ -1,14 +1,10 @@
 # CardioAgent
 
-> **No solo predice el riesgo cardiovascular. Lo explica y actúa sobre él.**
-
 Sistema **agente basado en utilidad** apoyado de *Machine Learning* para la
 **evaluación y recomendación clínica del riesgo cardiovascular**.
 
-Curso: **Agentes Inteligentes** · Bloque `FC-VIRISF08B01` · USIL 2026-01
-Grupo 6 — Huanuco Flores, Luis Angel · Sanabria Farfán, Andrés Paolo
+Integrantes: Huanuco Flores, Luis Angel · Sanabria Farfán, Andrés Paolo
 
----
 
 ## 1. Descripción
 
@@ -129,8 +125,7 @@ python -m examples.casos_estudio
 
 ## 5.1 Interfaz web
 
-`python main.py serve` levanta la aplicación web (FastAPI). Abre
-`http://127.0.0.1:8000` en el navegador. Tiene dos páginas:
+`python main.py serve` levanta la aplicación web.
 
 - **Evaluar** (`/`): formulario de datos clínicos → nivel de riesgo (medidor con
   los cortes 0.35 / 0.65), pestañas **Paciente** / **Médico** (con el desglose
@@ -171,12 +166,3 @@ Ejemplo de `ejemplo_paciente.json`:
 ## 7. Stack técnico
 
 Python 3.10+ · scikit-learn · XGBoost · SHAP · pandas · NumPy · Matplotlib · Seaborn · joblib
-
-## 8. Referencias
-
-- Russell, S. J., & Norvig, P. (2020). *Artificial Intelligence: A Modern Approach* (4th ed.). Pearson.
-- Lundberg, S. M., & Lee, S.-I. (2017). *A unified approach to interpreting model predictions*. NeurIPS 30.
-- Chapman, P. et al. (2000). *CRISP-DM 1.0: Step-by-step data mining guide*.
-- Kaggle. *Cardiovascular Disease Dataset* (Sulianova).
-
-Repositorio: https://github.com/LuizzzAngel21/Sistema-agente-basado-en-machine-learning
