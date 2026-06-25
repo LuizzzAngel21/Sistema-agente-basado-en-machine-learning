@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CardioAgent — Evaluación del riesgo cardiovascular</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <!-- Encabezado -->
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 21s-7.5-4.6-10-9.2C.4 8.3 2 4.8 5.3 4.8c2 0 3.3 1.2 4.2 2.5.9-1.3 2.2-2.5 4.2-2.5 3.3 0 4.9 3.5 3.3 7C19.5 16.4 12 21 12 21Z"/>
+        <path class="pulse" d="M2 12.5h4.2l1.6-3 2.4 6 2-4.3 1.3 1.3H22" fill="none"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">CardioAgent</span>
+        <span class="brand-tag">Evaluación y recomendación clínica del riesgo cardiovascular</span>
+      </div>
+    </div>
+    <nav class="topnav">
+      <a class="topnav-link active" href="/">Evaluar</a>
+      <a class="topnav-link" href="/modelo">Datos y Modelo</a>
+      <a class="topbar-link" href="/docs" target="_blank" rel="noopener">API ↗</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <!-- Panel de entrada -->
+    <section class="card form-card" aria-label="Datos clínicos del paciente">
+      <h2 class="card-title">Datos clínicos del paciente</h2>
+      <p class="card-sub">Percepción del agente</p>
+
+      <form id="patient-form">
+        <fieldset>
+          <legend>Variables objetivas</legend>
+          <div class="grid-2">
+            <label>Edad (años)
+              <input type="number" name="age_years" min="1" max="120" step="1" value="58" required />
+            </label>
+            <label>Género
+              <select name="gender">
+                <option value="2">Hombre</option>
+                <option value="1">Mujer</option>
+              </select>
+            </label>
+            <label>Altura (cm)
+              <input type="number" name="height" min="120" max="220" step="1" value="168" required />
+            </label>
+            <label>Peso (kg)
+              <input type="number" name="weight" min="30" max="300" step="0.1" value="92" required />
+            </label>
+            <label>Presión sistólica
+              <input type="number" name="ap_hi" min="70" max="300" step="1" value="150" required />
+            </label>
+            <label>Presión diastólica
+              <input type="number" name="ap_lo" min="40" max="200" step="1" value="95" required />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Variables de examen</legend>
+          <div class="grid-2">
+            <label>Colesterol
+              <select name="cholesterol">
+                <option value="1">Normal</option>
+                <option value="2">Alto</option>
+                <option value="3" selected>Muy alto</option>
+              </select>
+            </label>
+            <label>Glucosa
+              <select name="gluc">
+                <option value="1">Normal</option>
+                <option value="2" selected>Alto</option>
+                <option value="3">Muy alto</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Hábitos</legend>
+          <div class="toggles">
+            <label class="toggle"><input type="checkbox" name="smoke" checked /><span>Fuma</span></label>
+            <label class="toggle"><input type="checkbox" name="alco" /><span>Consume alcohol</span></label>
+            <label class="toggle"><input type="checkbox" name="active" /><span>Activo físicamente</span></label>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn-primary" id="submit-btn">Evaluar riesgo</button>
+      </form>
+    </section>
+
+    <!-- Panel de resultados -->
+    <section class="results" aria-live="polite">
+      <!-- Estado vacío -->
+      <div class="card empty-state" id="empty-state">
+        <svg viewBox="0 0 24 24" class="empty-icon" aria-hidden="true">
+          <path d="M12 21s-7.5-4.6-10-9.2C.4 8.3 2 4.8 5.3 4.8c2 0 3.3 1.2 4.2 2.5.9-1.3 2.2-2.5 4.2-2.5 3.3 0 4.9 3.5 3.3 7C19.5 16.4 12 21 12 21Z"/>
+        </svg>
+        <h3>Listo para evaluar</h3>
+        <p>Completa los datos del paciente y presiona <strong>Evaluar riesgo</strong> para obtener la predicción, su explicación con SHAP y las recomendaciones personalizadas.</p>
+      </div>
+
+      <!-- Resultados (oculto hasta evaluar) -->
+      <div id="results-content" class="hidden">
+        <!-- Tarjeta de riesgo -->
+        <div class="card risk-card">
+          <div class="risk-head">
+            <div>
+              <span class="risk-eyebrow">Predicción del riesgo · Módulo 1</span>
+              <div class="risk-level" id="risk-level">—</div>
+            </div>
+            <div class="risk-prob">
+              <span id="risk-prob-value">0%</span>
+              <small>probabilidad de ECV</small>
+            </div>
+          </div>
+          <div class="meter">
+            <div class="meter-track">
+              <span class="zone zone-low"></span>
+              <span class="zone zone-mid"></span>
+              <span class="zone zone-high"></span>
+              <span class="meter-marker" id="meter-marker"></span>
+            </div>
+            <div class="meter-scale"><span>0</span><span>0.35</span><span>0.65</span><span>1.0</span></div>
+          </div>
+          <div class="risk-foot">
+            <span class="risk-model" id="risk-model"></span>
+            <button class="btn-ghost" id="download-pdf" type="button">Descargar PDF</button>
+          </div>
+        </div>
+
+        <!-- Pestañas Paciente / Médico -->
+        <div class="card">
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="patient" role="tab">Paciente</button>
+            <button class="tab" data-tab="doctor" role="tab">Médico</button>
+          </div>
+          <div class="tab-panel" id="tab-patient">
+            <p class="panel-hint">Recomendaciones en lenguaje accesible · Módulo 3</p>
+            <ul class="rec-list" id="rec-patient"></ul>
+          </div>
+          <div class="tab-panel hidden" id="tab-doctor">
+            <p class="panel-hint">Recomendaciones clínicas alineadas a guías AHA / CDC 2024 · Módulo 3</p>
+            <ul class="rec-list" id="rec-doctor"></ul>
+          </div>
+        </div>
+
+        <!-- Explicación SHAP -->
+        <div class="card">
+          <h3 class="card-title">Factores determinantes</h3>
+          <p class="card-sub">Explicación con SHAP · Módulo 2 — contribución de cada variable a esta predicción</p>
+          <div class="shap-legend">
+            <span><i class="dot up"></i> Aumenta el riesgo</span>
+            <span><i class="dot down"></i> Reduce el riesgo</span>
+          </div>
+          <div class="shap-chart" id="shap-chart"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="disclaimer">
+    Herramienta de apoyo a la decisión clínica. No reemplaza el diagnóstico ni la consulta médica profesional.
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

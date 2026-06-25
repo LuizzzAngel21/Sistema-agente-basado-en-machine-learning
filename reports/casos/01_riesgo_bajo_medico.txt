@@ -1,0 +1,24 @@
+============================================================
+  REPORTE CLÍNICO — CardioAgent
+============================================================
+
+Probabilidad de ECV : 0.028
+Clasificación        : SIN RIESGO
+Nivel de riesgo      : BAJO
+Modelo               : xgboost
+
+Factores determinantes (SHAP local, orden de influencia):
+  - Edad                 SHAP=-1.3101  (↓ riesgo)
+  - Presión sistólica    SHAP=-1.1102  (↓ riesgo)
+  - IMC                  SHAP=-0.2867  (↓ riesgo)
+  - Presión diastólica   SHAP=-0.2032  (↓ riesgo)
+  - Colesterol           SHAP=-0.1787  (↓ riesgo)
+  - Actividad física     SHAP=-0.0340  (↓ riesgo)
+  - Tabaquismo           SHAP=+0.0182  (↑ riesgo)
+  - Género               SHAP=-0.0156  (↓ riesgo)
+  - Consumo de alcohol   SHAP=+0.0122  (↑ riesgo)
+  - Glucosa              SHAP=-0.0063  (↓ riesgo)
+
+Recomendaciones priorizadas por utilidad esperada (AHA / CDC 2024):
+  Sin indicaciones farmacológicas/derivaciones prioritarias.
+============================================================

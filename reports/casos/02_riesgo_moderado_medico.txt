@@ -1,0 +1,29 @@
+============================================================
+  REPORTE CLÍNICO — CardioAgent
+============================================================
+
+Probabilidad de ECV : 0.524
+Clasificación        : RIESGO
+Nivel de riesgo      : MODERADO
+Modelo               : xgboost
+
+Factores determinantes (SHAP local, orden de influencia):
+  - Presión sistólica    SHAP=+0.3197  (↑ riesgo)
+  - Edad                 SHAP=-0.2147  (↓ riesgo)
+  - Colesterol           SHAP=-0.1852  (↓ riesgo)
+  - Actividad física     SHAP=+0.1728  (↑ riesgo)
+  - IMC                  SHAP=+0.0496  (↑ riesgo)
+  - Presión diastólica   SHAP=-0.0361  (↓ riesgo)
+  - Glucosa              SHAP=+0.0192  (↑ riesgo)
+  - Género               SHAP=+0.0188  (↑ riesgo)
+  - Tabaquismo           SHAP=+0.0132  (↑ riesgo)
+  - Consumo de alcohol   SHAP=+0.0120  (↑ riesgo)
+
+Recomendaciones priorizadas por utilidad esperada (AHA / CDC 2024):
+  1. [Presión sistólica] Evaluar terapia antihipertensiva y monitoreo de presión arterial.
+       U=0.257  (contrib=0.53 · eficacia=0.90 · factibilidad=0.60 · costo=0.10)
+  2. [Sedentarismo] Reforzar adherencia al ejercicio físico y actividad cardiovascular.
+       U=0.133  (contrib=0.29 · eficacia=0.70 · factibilidad=0.70 · costo=0.05)
+  3. [IMC elevado] Referir a nutricionista y plan de control de peso.
+       U=0.019  (contrib=0.08 · eficacia=0.70 · factibilidad=0.40 · costo=0.15)
+============================================================

@@ -1,0 +1,11 @@
+============================================================
+  REPORTE PARA EL PACIENTE — CardioAgent
+============================================================
+
+Tu riesgo cardiovascular es BAJO. ¡Buen trabajo! Mantén tus hábitos.
+
+Recomendaciones personalizadas para ti:
+  Sin factores de riesgo modificables prioritarios. ¡Sigue así!
+
+Este reporte es orientativo y no reemplaza la consulta médica.
+============================================================

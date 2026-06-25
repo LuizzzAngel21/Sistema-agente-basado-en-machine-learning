@@ -1,0 +1,30 @@
+# Datos (no versionar el dataset crudo)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Modelos y artefactos generados
+models/*
+!models/.gitkeep
+reports/figures/*
+!reports/figures/.gitkeep
+reports/*.txt
+reports/*.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# OS / editores
+.DS_Store
+.vscode/
+.idea/
+
+
+*.pyc
+.pytest_cache/

@@ -1,0 +1,15 @@
+============================================================
+  REPORTE PARA EL PACIENTE — CardioAgent
+============================================================
+
+Tu riesgo cardiovascular es ALTO. Es importante actuar pronto y consultar a tu médico.
+
+Recomendaciones personalizadas para ti:
+  1. [Presión sistólica] Controla el estrés y reduce el consumo de sal en tus comidas.
+  2. [Colesterol alto] Reduce el consumo de grasas saturadas y frituras.
+  3. [Sedentarismo] Realiza ejercicio aeróbico regular (al menos 150 min/semana).
+  4. [IMC elevado] Incorpora actividad física regular y ajusta tu dieta.
+  5. [Presión diastólica] Mantén hábitos que cuiden tu presión: menos sal y más descanso.
+
+Este reporte es orientativo y no reemplaza la consulta médica.
+============================================================
