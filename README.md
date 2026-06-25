@@ -5,7 +5,6 @@ Sistema **agente basado en utilidad** apoyado de *Machine Learning* para la
 
 Integrantes: Huanuco Flores, Luis Angel · Sanabria Farfán, Andrés Paolo
 
-
 ## 1. Descripción
 
 CardioAgent es un agente inteligente que, a partir de los datos clínicos de un
